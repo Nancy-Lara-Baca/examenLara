@@ -1,42 +1,92 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MiExamen());
+}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class MiExamen extends StatelessWidget {
+  const MiExamen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        // useMaterial3: false,
-        primarySwatch: Colors.blue,
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Ejemplo de contenedores'),
+          centerTitle: true,
+          titleTextStyle:
+              const TextStyle(color: Color(0xffffffff), fontSize: 25),
+          backgroundColor: Colors.blue,
+        ),
+        body: ListView(
+          padding: EdgeInsets.all(10),
+          children: [
+            Text("  Nancy Lara Baca Mat: 22308051281225",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                )),
+            _buildTransportContainer(Icons.directions_car,
+                'Esto es un carro, porque es un carro. Entonces es un carro y es un carro porque es un carro'),
+            SizedBox(height: 10),
+            _buildTransportContainer(Icons.directions_bike,
+                'Esta es una bicicleta. Entonces esta es una bicicltea porque es una bicicleta'),
+            SizedBox(height: 10),
+            _buildTransportContainer(
+                Icons.directions_boat, 'Este es un barco porque es un barco'),
+            SizedBox(height: 10),
+            _buildTransportContainer(Icons.directions_bus,
+                'Este es un autobús porque es un autobús'),
+            SizedBox(height: 10),
+            _buildTransportContainer(
+                Icons.train, 'Este es un tren. Entonces es un tren'),
+            SizedBox(height: 10),
+            _buildTransportContainer(Icons.directions_walk_rounded,
+                'Este es un caminante porque esta caminando'),
+          ],
+        ),
       ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
-}
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
+  Widget _buildTransportContainer(IconData icon, String description) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
       ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
-        ),
+      child: Row(
+        children: [
+          // Ícono del medio de transporte
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: Icon(
+              icon,
+              size: 40,
+              color: Color(0xff5e5e5e), // Color del ícono
+            ),
+          ),
+          // Descripción del medio de transporte
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                description,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
